@@ -116,7 +116,7 @@
             }
 
             100% {
-                transform: translate3d(-100%, 0, 0);
+                transform: translate3d(-125%, 0, 0);
             }
         }
 
@@ -127,7 +127,7 @@
             animation-iteration-count: infinite;
             animation-timing-function: linear;
             animation-name: ticker;
-            animation-duration: 30s;
+            animation-duration: 40s;
             margin: 0 auto;
             font-size: 2rem;
             padding: 0 2rem;
@@ -247,7 +247,7 @@
             <div id="display-logo-text"></div>
         </div>
         <div id="heading">
-            <div id="display-main-message"></div>
+            <div id="display-main-message" class="blink"></div>
             <div id="timer"></div>
         </div>
         <div id="display-description"></div>
@@ -339,7 +339,7 @@
             document.getElementById('display-main-message').style.color = data['main-message-color']
             document.getElementById('display-description').textContent = data['description']
             document.getElementById('ticker-transition').textContent =
-                (data['scrolling-text'] || '').split('|').join('        ')
+                (data['scrolling-text'] || '').split('|').join('    •    ')
             // Timer
 
             let totalMilliseconds =
@@ -382,9 +382,12 @@
             // Audio
             if (data['audio-url']) {
                 const audio = new Audio(data['audio-url'])
+                audio.addEventListener('ended', function () {
+                    this.currentTime = 0
+                    this.play()
+                }, false)
                 audio.play()
             }
-
             document.getElementById('setup-page').style.display = 'none'
             document.getElementById('display-page').style.display = 'flex'
         }

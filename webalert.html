@@ -225,13 +225,12 @@
             <div class="setup-row">
                 <label for="scrolling-text">Scrolling Text:</label>
                 <textarea id="scrolling-text" rows="4" cols="60"></textarea> </td>
-                <div class="setup-row">
-                    <label for="audio-url">Audio URL:</label>
-                    <input type="text" id="audio-url">
-                </div>
+            </div>
+            <div class="setup-row">
+                <label for="audio-url">Audio URL:</label>
+                <input type="text" id="audio-url">
             </div>
             <div>
-                <input type="file" id="load-configuration" value="Load Configuration" onchange="loadForm();"></td>
                 <input type="button" value="Load JSON" onclick="loadJson()">
                 <input type="button" value="Save JSON" onclick="saveJson()">
                 <input type="reset" value="Reset">
@@ -241,14 +240,14 @@
 
         <div id="display-page" style="display:none;">
             <div id="logo">
-                <img id="logo-image" src="" alt="Logo">
-                <div id="logo-text"></div>
+                <img id="display-logo-image" src="" alt="Logo">
+                <div id="display-logo-text"></div>
             </div>
             <div id="heading">
-                <div id="main-message"></div>
+                <div id="display-main-message"></div>
                 <div id="timer"></div>
             </div>
-            <div id="description"></div>
+            <div id="display-description"></div>
             <div id="ticker-container">
                 <div id="ticker-wrapper">
                     <div id="ticker-transition"></div>
@@ -310,6 +309,8 @@
 
             function startAlert() {
                 const data = {}
+
+                // Collect inputs
                 document.querySelectorAll('#setup-page input').forEach(input => {
                     if (input.type === "checkbox") {
                         data[input.id] = input.checked
@@ -318,16 +319,21 @@
                     }
                 })
 
+                // Collect textareas
+                document.querySelectorAll('#setup-page textarea').forEach(textarea => {
+                    data[textarea.id] = textarea.value
+                })
+
                 document.body.style.backgroundColor = data['background-color']
                 document.body.style.color = data['text-color']
 
-                document.getElementById('logo-image').src = data['logo-image-url']
-                document.getElementById('logo-text').textContent = data['logo-text']
-                document.getElementById('main-message').textContent = data['main-message']
-                document.getElementById('main-message').style.color = data['main-message-color']
-                document.getElementById('description').textContent = data['description']
-                document.getElementById('ticker-transition').textContent = data['scrolling-text'].split('|').join('     ')
-
+                document.getElementById('display-logo-image').src = data['logo-image-url']
+                document.getElementById('display-logo-text').textContent = data['logo-text']
+                document.getElementById('display-main-message').textContent = data['main-message']
+                document.getElementById('display-main-message').style.color = data['main-message-color']
+                document.getElementById('display-description').textContent = data['description']
+                document.getElementById('ticker-transition').textContent =
+                    (data['scrolling-text'] || '').split('|').join('     ')
                 // Timer
                 let totalSeconds = (parseInt(data['days'] || 0) * 86400) + (parseInt(data['hours'] || 0) * 3600) + (parseInt(data['minutes'] || 0) * 60) + parseInt(data['seconds'] || 0)
                 const timerEl = document.getElementById('timer')

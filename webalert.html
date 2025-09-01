@@ -26,15 +26,20 @@
             display: flex;
             flex-direction: column;
             justify-content: space-around;
+            width: 100vw;
+            /* full width */
+            height: 100vh;
+            /* full height */
+            box-sizing: border-box;
         }
 
-        #logo-image {
+        #display-logo-image {
             max-height: 12rem;
             display: block;
             margin: 0 auto;
         }
 
-        #logo-text {
+        #display-logo-text {
             font-size: 1.5rem;
             font-weight: bold;
             color: inherit;
@@ -51,7 +56,7 @@
             margin: 1rem;
         }
 
-        #main-message {
+        #display-main-message {
             font-size: 3rem;
             font-weight: bold;
             text-align: center;
@@ -80,7 +85,7 @@
             }
         }
 
-        #description {
+        #display-description {
             font-size: 2em;
             white-space: pre-wrap;
             text-align: center;
@@ -124,12 +129,10 @@
             animation-name: ticker;
             animation-duration: 30s;
             margin: 0 auto;
-        }
-
-        .ticker-item {
-            display: inline-block;
             font-size: 2rem;
             padding: 0 2rem;
+            white-space: pre;
+            /* preserve spaces exactly as typed */
         }
 
         input {
@@ -237,137 +240,153 @@
                 <input type="button" value="Start Alert" onclick="startAlert()">
             </div>
         </div>
-
-        <div id="display-page" style="display:none;">
-            <div id="logo">
-                <img id="display-logo-image" src="" alt="Logo">
-                <div id="display-logo-text"></div>
-            </div>
-            <div id="heading">
-                <div id="display-main-message"></div>
-                <div id="timer"></div>
-            </div>
-            <div id="display-description"></div>
-            <div id="ticker-container">
-                <div id="ticker-wrapper">
-                    <div id="ticker-transition"></div>
-                </div>
+    </div>
+    <div id="display-page" style="display:none;">
+        <div id="logo">
+            <img id="display-logo-image" src="" alt="Logo">
+            <div id="display-logo-text"></div>
+        </div>
+        <div id="heading">
+            <div id="display-main-message"></div>
+            <div id="timer"></div>
+        </div>
+        <div id="display-description"></div>
+        <div id="ticker-container">
+            <div id="ticker-wrapper">
+                <div id="ticker-transition"></div>
             </div>
         </div>
+    </div>
 
-        <script>
-            function saveJson() {
-                const data = {
-                    "background-color": document.getElementById('background-color').value,
-                    "text-color": document.getElementById('text-color').value,
-                    "logo-image-url": document.getElementById('logo-image-url').value,
-                    "logo-text": document.getElementById('logo-text').value,
-                    "main-message": document.getElementById('main-message').value,
-                    "main-message-color": document.getElementById('main-message-color').value,
-                    "days": document.getElementById('days').value,
-                    "hours": document.getElementById('hours').value,
-                    "minutes": document.getElementById('minutes').value,
-                    "seconds": document.getElementById('seconds').value,
-                    "timer-blink": document.getElementById('timer-blink').checked,
-                    "timer-prefix": document.getElementById('timer-prefix').value,
-                    "timer-end-message": document.getElementById('timer-end-message').value,
-                    "description": document.getElementById('description').value,
-                    "scrolling-text": document.getElementById('scrolling-text').value,
-                    "audio-url": document.getElementById('audio-url').value
-                }
-                const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
-                const a = document.createElement('a')
-                a.href = URL.createObjectURL(blob)
-                a.download = 'alert-config.json'
-                a.click()
+
+
+    <script>
+        function saveJson() {
+            const data = {
+                "background-color": document.getElementById('background-color').value,
+                "text-color": document.getElementById('text-color').value,
+                "logo-image-url": document.getElementById('logo-image-url').value,
+                "logo-text": document.getElementById('logo-text').value,
+                "main-message": document.getElementById('main-message').value,
+                "main-message-color": document.getElementById('main-message-color').value,
+                "days": document.getElementById('days').value,
+                "hours": document.getElementById('hours').value,
+                "minutes": document.getElementById('minutes').value,
+                "seconds": document.getElementById('seconds').value,
+                "timer-blink": document.getElementById('timer-blink').checked,
+                "timer-prefix": document.getElementById('timer-prefix').value,
+                "timer-end-message": document.getElementById('timer-end-message').value,
+                "description": document.getElementById('description').value,
+                "scrolling-text": document.getElementById('scrolling-text').value,
+                "audio-url": document.getElementById('audio-url').value
             }
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
+            const a = document.createElement('a')
+            a.href = URL.createObjectURL(blob)
+            a.download = 'alert-config.json'
+            a.click()
+        }
 
-            function loadJson() {
-                const input = document.createElement('input')
-                input.type = 'file'
-                input.accept = '.json'
-                input.onchange = e => {
-                    const file = e.target.files[0]
-                    const reader = new FileReader()
-                    reader.onload = ev => {
-                        const data = JSON.parse(ev.target.result)
-                        for (const key in data) {
-                            const el = document.getElementById(key)
-                            if (el) {
-                                if (el.type === "checkbox") {
-                                    el.checked = data[key]
-                                } else {
-                                    el.value = data[key]
-                                }
+        function loadJson() {
+            const input = document.createElement('input')
+            input.type = 'file'
+            input.accept = '.json'
+            input.onchange = e => {
+                const file = e.target.files[0]
+                const reader = new FileReader()
+                reader.onload = ev => {
+                    const data = JSON.parse(ev.target.result)
+                    for (const key in data) {
+                        const el = document.getElementById(key)
+                        if (el) {
+                            if (el.type === "checkbox") {
+                                el.checked = data[key]
+                            } else {
+                                el.value = data[key]
                             }
                         }
                     }
-                    reader.readAsText(file)
                 }
-                input.click()
+                reader.readAsText(file)
+            }
+            input.click()
+        }
+
+
+        function startAlert() {
+            const data = {}
+
+            // Collect inputs
+            document.querySelectorAll('#setup-page input').forEach(input => {
+                if (input.type === "checkbox") {
+                    data[input.id] = input.checked
+                } else {
+                    data[input.id] = input.value
+                }
+            })
+
+            // Collect textareas
+            document.querySelectorAll('#setup-page textarea').forEach(textarea => {
+                data[textarea.id] = textarea.value
+            })
+
+            document.body.style.backgroundColor = data['background-color']
+            document.body.style.color = data['text-color']
+
+            document.getElementById('display-logo-image').src = data['logo-image-url']
+            document.getElementById('display-logo-text').textContent = data['logo-text']
+            document.getElementById('display-main-message').textContent = data['main-message']
+            document.getElementById('display-main-message').style.color = data['main-message-color']
+            document.getElementById('display-description').textContent = data['description']
+            document.getElementById('ticker-transition').textContent =
+                (data['scrolling-text'] || '').split('|').join('        ')
+            // Timer
+
+            let totalMilliseconds =
+                ((parseInt(data['days'] || 0) * 86400) +
+                    (parseInt(data['hours'] || 0) * 3600) +
+                    (parseInt(data['minutes'] || 0) * 60) +
+                    parseInt(data['seconds'] || 0)) * 1000
+
+            const timerEl = document.getElementById('timer')
+            const startTime = Date.now()
+
+            const timerInterval = setInterval(() => {
+                const elapsedMs = Date.now() - startTime
+                const remainingMs = totalMilliseconds - elapsedMs
+
+                if (remainingMs <= 0) {
+                    timerEl.textContent = data['timer-end-message']
+                    timerEl.classList.add('blink')
+                    clearInterval(timerInterval)
+                    return
+                }
+
+                let d = Math.floor(remainingMs / 86400000)
+                let h = Math.floor((remainingMs % 86400000) / 3600000)
+                let m = Math.floor((remainingMs % 3600000) / 60000)
+                let s = Math.floor((remainingMs % 60000) / 1000)
+                let ms = remainingMs % 1000
+
+                let dd = String(d).padStart(2, '0')
+                let hh = String(h).padStart(2, '0')
+                let mm = String(m).padStart(2, '0')
+                let ss = String(s).padStart(2, '0')
+                let mss = String(ms).padStart(3, '0')
+
+                timerEl.textContent = `${dd}:${hh}:${mm}:${ss}:${mss}`
+            }, 50)
+
+            // Audio
+            if (data['audio-url']) {
+                const audio = new Audio(data['audio-url'])
+                audio.play()
             }
 
-            function startAlert() {
-                const data = {}
-
-                // Collect inputs
-                document.querySelectorAll('#setup-page input').forEach(input => {
-                    if (input.type === "checkbox") {
-                        data[input.id] = input.checked
-                    } else {
-                        data[input.id] = input.value
-                    }
-                })
-
-                // Collect textareas
-                document.querySelectorAll('#setup-page textarea').forEach(textarea => {
-                    data[textarea.id] = textarea.value
-                })
-
-                document.body.style.backgroundColor = data['background-color']
-                document.body.style.color = data['text-color']
-
-                document.getElementById('display-logo-image').src = data['logo-image-url']
-                document.getElementById('display-logo-text').textContent = data['logo-text']
-                document.getElementById('display-main-message').textContent = data['main-message']
-                document.getElementById('display-main-message').style.color = data['main-message-color']
-                document.getElementById('display-description').textContent = data['description']
-                document.getElementById('ticker-transition').textContent =
-                    (data['scrolling-text'] || '').split('|').join('     ')
-                // Timer
-                let totalSeconds = (parseInt(data['days'] || 0) * 86400) + (parseInt(data['hours'] || 0) * 3600) + (parseInt(data['minutes'] || 0) * 60) + parseInt(data['seconds'] || 0)
-                const timerEl = document.getElementById('timer')
-                const blink = data['timer-blink']
-
-                function updateTimer() {
-                    if (totalSeconds < 0) {
-                        timerEl.textContent = data['timer-end-message']
-                        clearInterval(timerInterval)
-                        return
-                    }
-                    let d = Math.floor(totalSeconds / 86400)
-                    let h = Math.floor((totalSeconds % 86400) / 3600)
-                    let m = Math.floor((totalSeconds % 3600) / 60)
-                    let s = totalSeconds % 60
-                    timerEl.textContent = `${data['timer-prefix']}${d}d ${h}h ${m}m ${s}s`
-                    if (blink) {
-                        timerEl.classList.toggle('blink')
-                    }
-                    totalSeconds--
-                }
-                updateTimer()
-                const timerInterval = setInterval(updateTimer, 1000)
-
-                // Audio
-                if (data['audio-url']) {
-                    const audio = new Audio(data['audio-url'])
-                    audio.play()
-                }
-
-                document.getElementById('setup-page').style.display = 'none'
-                document.getElementById('display-page').style.display = 'flex'
-            }
-        </script>
+            document.getElementById('setup-page').style.display = 'none'
+            document.getElementById('display-page').style.display = 'flex'
+        }
+    </script>
 </body>
 
 </html>

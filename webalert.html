@@ -356,8 +356,8 @@
                 const remainingMs = totalMilliseconds - elapsedMs
 
                 if (remainingMs <= 0) {
-                    timerEl.textContent = data['timer-end-message']
-                    timerEl.classList.add('blink')
+                    timerEl.textContent = data['timer-end-message'] || ''
+                    timerEl.classList.add('blink')  // Only blink when time is up
                     clearInterval(timerInterval)
                     return
                 }
@@ -366,16 +366,18 @@
                 let h = Math.floor((remainingMs % 86400000) / 3600000)
                 let m = Math.floor((remainingMs % 3600000) / 60000)
                 let s = Math.floor((remainingMs % 60000) / 1000)
-                let ms = remainingMs % 1000
+                let ms = Math.floor((remainingMs % 1000) / 10)  // Convert to 2 digits
 
                 let dd = String(d).padStart(2, '0')
                 let hh = String(h).padStart(2, '0')
                 let mm = String(m).padStart(2, '0')
                 let ss = String(s).padStart(2, '0')
-                let mss = String(ms).padStart(3, '0')
+                let mss = String(ms).padStart(2, '0')  // 2-digit milliseconds
 
-                timerEl.textContent = `${dd}:${hh}:${mm}:${ss}:${mss}`
-            }, 50)
+                // Show prefix but do not blink
+                timerEl.textContent = `${data['timer-prefix'] || ''}${dd}:${hh}:${mm}:${ss}:${mss}`
+                timerEl.classList.remove('blink')  // Ensure blinking is off while counting
+            }, 20)
 
             // Audio
             if (data['audio-url']) {

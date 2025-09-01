@@ -1,0 +1,18 @@
+{
+    "background-color": "#ffffff",
+    "text-color": "#000000",
+    "logo-image-url": "https://www.odpem.org.jm/wp-content/uploads/2019/08/ODPEM-Logo.png",
+    "logo-text": "NATIONAL EMERGENCY WARNING SYSTEM",
+    "main-message": "EARTHQUAKE EARLY WARNING",
+    "main-message-color": "#ff0000",
+    "days": "",
+    "hours": "",
+    "minutes": "",
+    "seconds": "33",
+    "timer-blink": true,
+    "timer-prefix": "ESTIMATED ARRIVAL IN ",
+    "timer-end-message": "EARTHQUAKE IN PROGRESS",
+    "description": "Magnitude 5.6 Earthquake detected 3 miles from Kingston",
+    "scrolling-text": "Earthquake Early Warning|Strong Shaking Expected|Seek shelter immediately|Protect your head and neck|If you are inside, shelter under a desk or other strong piece of furniture or crouch near a strong inner wall|If you are outside, stay clear of buildings, trees and utilitiy poles.|If you are driving, pull over to the side of the road.|Remember DCH - drop, cover and hold on",
+    "audio-url": "https://assets.mixkit.co/active_storage/sfx/999/999-preview.mp3"
+}

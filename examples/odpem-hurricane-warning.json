@@ -1,0 +1,18 @@
+{
+    "background-color": "#ffffff",
+    "text-color": "#000000",
+    "logo-image-url": "https://www.odpem.org.jm/wp-content/uploads/2019/08/ODPEM-Logo.png",
+    "logo-text": "NATIONAL EMERGENCY WARNING SYSTEM",
+    "main-message": "HURRICANE WARNING",
+    "main-message-color": "#ff0000",
+    "days": "1",
+    "hours": "0",
+    "minutes": "0",
+    "seconds": "0",
+    "timer-blink": true,
+    "timer-prefix": "HURRICANE IMPACT IN ",
+    "timer-end-message": "HURRICANE IMPACTED AREA",
+    "description": "A Hurricane Warning has been issued for your area. Prepare for severe weather conditions.",
+    "scrolling-text": "HURRICANE WARNING ISSUED|SECURE YOUR HOME|STAY INDOORS|AVOID FLOODED AREAS|LISTEN TO OFFICIAL ADVISORIES|STAY SAFE",
+    "audio-url": "https://assets.mixkit.co/active_storage/sfx/999/999-preview.mp3"
+}

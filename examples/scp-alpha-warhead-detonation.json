@@ -1,0 +1,18 @@
+{
+    "background-color": "#000000",
+    "text-color": "#ffffff",
+    "logo-image-url": "https://upload.wikimedia.org/wikipedia/commons/2/28/SCP_Foundation_Logo_v3.png",
+    "logo-text": "CENTRAL AUTONOMIC SERVICE SYSTEM FOR INTERNAL EMERGENCIES",
+    "main-message": "ALPHA WARHEAD EMERGENCY DETONATION SEQUENCE ENGAGED",
+    "main-message-color": "#ff0000",
+    "main-message-blink": true,
+    "days": "",
+    "hours": "",
+    "minutes": "1",
+    "seconds": "41",
+    "timer-prefix": "DETONATION IN ",
+    "timer-end-message": "DETONATION",
+    "description": "UNDERGROUND SECTION OF FACILITY WILL BE DETONATED. EVACUATE IMMEDIATELY",
+    "scrolling-text": "ALPHA WARHEAD EMERGENCY DETONATION SEQUENCE ENGAGED | UNDERGROUND SECTION OF FACILITY WILL BE DETONATED | EMERGENCY EVACUATION PROCEDURES IN EFFECT | ALL DOORS UNLOCKED | PROCEED TO BLAST SHELTER OR EXTRACTION POINT IMMEDIATELY | THIS IS NOT A DRILL",
+    "audio-url": "https://hub.scpslgame.com/images/8/8b/Main90.mp3"
+}

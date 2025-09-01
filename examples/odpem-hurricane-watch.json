@@ -1,0 +1,18 @@
+{
+    "background-color": "#ffffff",
+    "text-color": "#000000",
+    "logo-image-url": "https://www.odpem.org.jm/wp-content/uploads/2019/08/ODPEM-Logo.png",
+    "logo-text": "National Emergency Warning System",
+    "main-message": "Hurricane Watch In Effect",
+    "main-message-color": "#ff6400",
+    "main-message-blink": false,
+    "days": "2",
+    "hours": "0",
+    "minutes": "0",
+    "seconds": "5",
+    "timer-prefix": "",
+    "timer-end-message": "Hurricane Present",
+    "description": "Hurricane Force Winds Expected Within 48 Hours",
+    "scrolling-text": "Hurricane Watch In Effect | Severity: Category 5 | Threat: Hurricane Force Winds | Certainty: Possible within 48 Hours | Response: Batten Down Home, Stock Up on Supplies",
+    "audio-url": "https://assets.mixkit.co/active_storage/sfx/999/999-preview.mp3"
+}
